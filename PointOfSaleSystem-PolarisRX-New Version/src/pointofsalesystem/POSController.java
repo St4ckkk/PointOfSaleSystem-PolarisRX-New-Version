@@ -3178,40 +3178,9 @@ public class POSController extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        generateSalesReport();
+        SalesReport sp = new SalesReport();
+        sp.setVisible(true);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
-
-    private void generateSalesReport() {
-        Connection con1 = null;
-        try {
-           
-            con1 = DBConnection.DBConnection();
-
-         
-            JasperReport jasperReport = JasperCompileManager.compileReport("C:\\Users\\user\\Downloads\\PointOfSaleSystem-PolarisRX-New Version\\PointOfSaleSystem-PolarisRX-New Version\\src\\pointofsalesystem\\pos_salesReport.jrxml");
-
-          
-            Map<String, Object> parameters = new HashMap<>();
-            parameters.put("ReportTitle", "Sales Report");
-
-        
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, con1);
-
- 
-            JasperViewer.viewReport(jasperPrint, false);
-
-        } catch (JRException e) {
-            e.printStackTrace();
-        } finally {
-            if (con1 != null) {
-                try {
-                    con1.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
 
     /**
      * @param args the command line arguments
