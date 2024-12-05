@@ -3188,7 +3188,7 @@ public class POSController extends javax.swing.JFrame {
             con1 = DBConnection.DBConnection();
 
          
-            JasperReport jasperReport = JasperCompileManager.compileReport("salesReport.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport("C:\\Users\\user\\Downloads\\PointOfSaleSystem-PolarisRX-New Version\\PointOfSaleSystem-PolarisRX-New Version\\src\\pointofsalesystem\\pos_salesReport.jrxml");
 
           
             Map<String, Object> parameters = new HashMap<>();
