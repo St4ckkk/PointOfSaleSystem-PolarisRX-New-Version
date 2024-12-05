@@ -51,7 +51,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
@@ -60,10 +59,16 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
-/**
- *
- * @author Michael Paul Sebando
- */
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.view.JasperViewer;
+
+import java.util.HashMap;
+import java.util.Map;
+        /**
+         *
+         * @author Michael Paul Sebando
+         */
+
 public class POSController extends javax.swing.JFrame {
 
     /**
@@ -1753,6 +1758,7 @@ public class POSController extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         AddStock = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
@@ -1777,10 +1783,8 @@ public class POSController extends javax.swing.JFrame {
         jMenuItem3.setText("jMenuItem3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1366, 760));
         setMinimumSize(new java.awt.Dimension(1366, 760));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1366, 760));
         setResizable(false);
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -2489,6 +2493,15 @@ public class POSController extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem10);
 
+        jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pointofsalesystem/Icons/Send to Printer_15px.png"))); // NOI18N
+        jMenuItem14.setText("Print Sales Report");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem14);
+
         jMenuBar1.add(jMenu4);
 
         jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pointofsalesystem/Icons/Trolley_15px.png"))); // NOI18N
@@ -3164,6 +3177,42 @@ public class POSController extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        generateSalesReport();
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
+    private void generateSalesReport() {
+        Connection con1 = null;
+        try {
+           
+            con1 = DBConnection.DBConnection();
+
+         
+            JasperReport jasperReport = JasperCompileManager.compileReport("salesReport.jrxml");
+
+          
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("ReportTitle", "Sales Report");
+
+        
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, con1);
+
+ 
+            JasperViewer.viewReport(jasperPrint, false);
+
+        } catch (JRException e) {
+            e.printStackTrace();
+        } finally {
+            if (con1 != null) {
+                try {
+                    con1.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -3269,6 +3318,7 @@ public class POSController extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

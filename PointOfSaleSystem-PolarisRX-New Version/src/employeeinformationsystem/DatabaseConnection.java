@@ -14,8 +14,8 @@ public class DatabaseConnection {
     static final String JDBC_DRIVER="com.mysql.jdbc.Driver";
     static final String DB_URL="jdbc:mysql://localhost/conveniencestore";
     static final String USER="root";
-    static final String PASS="020894mpos";
-    
+    static final String PASS="";
+//    020894mpos
      public static Connection DBConnect(){
         Connection con;
         
